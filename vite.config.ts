@@ -1,7 +1,7 @@
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import eslintPlugin from 'vite-plugin-eslint'
-
+import path from 'path'
 export default defineConfig(({ command, mode }) => {
   const root = process.cwd()
   const env = loadEnv(mode, root)
@@ -24,6 +24,11 @@ export default defineConfig(({ command, mode }) => {
           changeOrigin: true,
           rewrite: path => path.replace(/^\/api/, '') // 将请求中/api用空值替换重写，根据实际业务修改
         }
+      }
+    },
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, './src')
       }
     }
   }
